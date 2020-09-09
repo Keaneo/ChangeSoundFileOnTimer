@@ -6,10 +6,10 @@ import shutil
 import glob
 
 #This is in seconds
-amountOfTimeToWait = 10
+amountOfTimeToWait = 1
 
 #The file extension for the sounds you have. This only supports one file type at a time, but could be modified to do more in the future
-fileType = ".wav"
+fileType = ".txt"
 
 #Find the current directory the script is in
 curDirectory = os.path.dirname(__file__)
@@ -47,11 +47,16 @@ def updateSoundFile():
     #Get the number of the files in the folder (This is dynamic* so files can be added while program is running)
     #*dynamic just means it updates itself when this method is called, so it's always accurate
     soundFiles = glob.glob1(fileDir, "*"+fileType)
+
+    if len(soundFiles) == 0:
+        print("There are no files matching the set filetype, exiting...")
+        exit()
     
     #Pick a random number that's different from the previous
     index = random.randint(0, len(soundFiles) - 1)
-    while index == lastindex:
-        index = random.randint(0, len(soundFiles) - 1)
+    if len(soundFiles) != 1:
+        while index == lastindex:
+            index = random.randint(0, len(soundFiles) - 1)
     
     #Copy the file to the destination folder.
     shutil.copyfile(os.path.join(fileDir, soundFiles[index]), os.path.join(destination, soundFiles[index]))
