@@ -59,7 +59,7 @@ def updateSoundFile():
             index = random.randint(0, len(soundFiles) - 1)
     
     #Copy the file to the destination folder.
-    shutil.copyfile(os.path.join(fileDir, soundFiles[index]), os.path.join(destination, soundFiles[index]))
+    shutil.copyfile(os.path.join(fileDir, soundFiles[index]), os.path.join(destination, "playthis" + fileType))
 
     #Increment the counter so next time we write a new sentence
     lastindex = index
